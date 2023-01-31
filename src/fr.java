@@ -18,7 +18,7 @@ public class fr {
     public static Connection getConecction() {
         Connection cn = null;
         String base = "estudiantesN"; //Nombre de la BD
-        String url = "jdbc:mysql://localhost/" + base; //Direccion, puerto y nombre BD
+        String url = "jdbc:mysql://localhost:3306/" + base; //Direccion, puerto y nombre BD
         String user = "root"; //Usuario
         String pass = "dariel17"; //Contraseña
         try {
@@ -48,7 +48,7 @@ public class fr {
                     } else {
                         JOptionPane.showMessageDialog(null,"Error");
                     }
-
+                    cn.close();
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
