@@ -65,7 +65,4 @@ public class fr {
         fr.setResizable(false);
         fr.setLocationRelativeTo(null);
     }
-
-
-
 }
