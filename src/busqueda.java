@@ -12,7 +12,6 @@ public class busqueda {
     private JButton actualizarButton;
     private JPanel bus;
     PreparedStatement pd;
-    public String ced;
     public busqueda() {
         buscarButton.addActionListener(new ActionListener() {
             @Override
@@ -20,8 +19,7 @@ public class busqueda {
                 Connection cx;
                 try {
                     cx = getConecction();
-                    ced = cedBus.getText();
-                    String qr = "select * from estd where IDEst = "+ced+";";
+                    String qr = "select * from estd where IDEst = "+cedBus.getText()+";";
                     Statement s = cx.createStatement();
                     ResultSet rs = s.executeQuery(qr);
                     System.out.println(rs);
@@ -41,16 +39,21 @@ public class busqueda {
             public void actionPerformed(ActionEvent e) {
                 Connection ct;
                 try {
-                    String qr = "Update estd set NomEst = ?, NomEst = ?, CelEst = ?, EmailEst = ? where IDEst = "+ced;
+                    String qr = "Update estd set NomEst = ?, CelEst = ?, EmailEst = ? where IDEst = "+cedBus.getText();
                     ct = getConecction();
                     pd = ct.prepareStatement(qr);
                     pd.setString(1, nomBus.getText());
                     pd.setString(2, celBus.getText());
                     pd.setString(3, emaBus.getText());
                     pd.executeUpdate();
-                    nomBus.setVisible(false);
-                    celBus.setVisible(false);
-                    emaBus.setVisible(false);
+                    System.out.println(pd);
+                    int res = pd.executeUpdate();
+                    if (res > 0) {
+                        JOptionPane.showMessageDialog(null,"Persona actualizada correctamente");
+                    } else {
+                        JOptionPane.showMessageDialog(null,"Error");
+                    }
+                    ct.close();
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
