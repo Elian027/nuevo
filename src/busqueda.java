@@ -11,7 +11,11 @@ public class busqueda {
     private JButton buscarButton;
     private JButton actualizarButton;
     private JPanel bus;
+    private JButton eliminarButton;
     PreparedStatement pd;
+    TextPrompt tp = new TextPrompt("Nombre",nomBus);
+    TextPrompt tp1 = new TextPrompt("Celular",celBus);
+
     public busqueda() {
         buscarButton.addActionListener(new ActionListener() {
             @Override
@@ -59,7 +63,20 @@ public class busqueda {
                 }
             }
         });
+        eliminarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Connection cn;
+                try {
+                    cn = getConecction();
+
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
+
 
     public static Connection getConecction() {
         Connection cn = null;
