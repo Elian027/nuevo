@@ -68,8 +68,17 @@ public class busqueda {
             public void actionPerformed(ActionEvent e) {
                 Connection cn;
                 try {
+                    String qr = "delete from estd where IDEst ="+cedBus.getText();
                     cn = getConecction();
-
+                    pd = cn.prepareStatement(qr);
+                    pd.executeUpdate();
+                    int res = pd.executeUpdate();
+                    if (res > 0) {
+                        JOptionPane.showMessageDialog(null,"Persona eliminada  correctamente");
+                    } else {
+                        JOptionPane.showMessageDialog(null,"Error");
+                    }
+                    cn.close();
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
